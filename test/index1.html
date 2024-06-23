@@ -1,0 +1,97 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		*{
+			animation: all 0.5s;
+		}
+		.content {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.right-content {
+			width: 125px;
+			flex: 1;
+		}
+
+		.left-content {
+			width: 500px;
+		}
+	</style>
+</head>
+
+<body>
+	<view class="content">
+		<view class="left-content">左边自适应</view>
+		<view class="right-content">右边固定</view>
+	</view>
+</body>
+
+</html> -->
+
+要使用 HTML 和 CSS 创建一个类似于 Windows 文件夹排列的布局，你可以使用 `flexbox` 布局。以下是一个简单的示例：
+
+```html
+<template>
+	<div class="folder-container">
+		<div class="folder">
+			<div class="folder-icon"></div>
+			<div class="folder-name">文件夹 1</div>
+		</div>
+		<div class="folder">
+			<div class="folder-icon"></div>
+			<div class="folder-name">文件夹 2</div>
+		</div>
+		<div class="folder">
+			<div class="folder-icon"></div>
+			<div class="folder-name">文件夹 3</div>
+		</div>
+	</div>
+</template>
+
+<style>
+	.folder-container {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin-left: -20px;
+	}
+
+	.folder {
+		position: relative;
+		display: inline-block;
+		width: 160px;
+		height: 180px;
+		margin-left: 20px;
+		margin-bottom: 20px;
+		background-color: #f0f0f0;
+		border-radius: 10px;
+	}
+
+	.folder-icon {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 100px;
+		height: 100px;
+		background-color: #333;
+		border-radius: 10px;
+	}
+
+	.folder-name {
+		position: absolute;
+		bottom: 10px;
+		left: 10px;
+		right: 10px;
+		text-align: center;
+		font-size: 24px;
+		color: #333;
+	}
+</style>

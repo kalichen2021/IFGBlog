@@ -1,0 +1,14 @@
+{
+	"PublishView":{
+		"itemLish":[
+			{
+				"name":"游戏1",
+				"img":"game1.jpg",
+				"link":"www.baodu.com",
+				"desc":"游戏1的描述",
+				"date":"2020-4-21",
+				"tag":"rog"
+			}
+		]
+	}
+}

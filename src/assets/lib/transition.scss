@@ -1,0 +1,29 @@
+.view-transition-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.view-transition-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.view-transition-enter-from,
+.view-transition-leave-to {
+  transform: translateX(-120px);
+  opacity: 0;
+}
+
+
+
+.icon-fade-in-enter-active {
+	transition: all 0.3s ease-out;
+}
+
+.icon-fade-in-leave-active {
+	transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.icon-fade-in-enter-from,
+.icon-fade-in-leave-to {
+	transform: translateY(20px);
+	opacity: 0;
+}
