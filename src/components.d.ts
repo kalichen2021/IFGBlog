@@ -10,6 +10,7 @@ declare module 'vue' {
     DashBoard: typeof import('./components/DashBoard.vue')['default']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
+    EventItem: typeof import('./components/imgWallView/EventItem.vue')['default']
     GameItem: typeof import('./components/publishView/GameItem.vue')['default']
     HeadBox: typeof import('./components/HeadBox.vue')['default']
     IconCommunity: typeof import('./components/icons/IconCommunity.vue')['default']

@@ -10,6 +10,8 @@
 
 <style scoped lang="scss">
 .dashBoard {
+	display: none;
+	
 	width: $dashBoardWidth;
 	height: 60vh;
 	background-color: var(--color-aa2);

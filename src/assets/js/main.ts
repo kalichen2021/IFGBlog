@@ -48,7 +48,6 @@ const getAndSetInvStyle = (
 	})
 }
 
-
 /**
  * 平滑过渡Filp动画，支持位移和缩放
  * @param targetEl 元素

@@ -14,7 +14,7 @@ import { useRoute } from 'vue-router'
 import { gsap } from 'gsap';
 import { Flip } from 'gsap/Flip';
 import GameItem from '@/components/publishView/GameItem.vue';
-import publishViewData from '@/settings/publishItem/main.json'
+import publishViewData from '@/source/publishItem/main.json'
 
 import { smoothTransition, getRowAndColumn } from '@/assets/js/main';
 import _ from 'lodash';
@@ -34,25 +34,35 @@ gsap.registerPlugin(Flip)
 const elMaskOp = {
 	show: () => {
 		elMask.value!.style.display = 'block'
-		gsap.fromTo('.mask', {
-			x: "-100vw",
-			y: "-100vh",
-		},
-		{
-			x: 0,
-			y: 0,
-			duration: 0.5,
-			opacity: 1,
-		})
+		gsap.fromTo('.mask',
+			{
+				x: "-100vw",
+				y: "-100vh",
+			},
+			{
+				x: "100vw",
+				y: "100vh",
+				duration: 0.8,
+				opacity: 1,
+			}
+		)
 	},
 	hide: () => {
-		gsap.to('.mask', {
-			duration: 0.5,
-			opacity: 0,
-			onComplete: () => {
-				elMask.value!.style.display = 'none'
-			}
-		})
+		gsap.fromTo('.mask',
+			{
+				x: "100vw",
+				y: "100vh",
+			},
+			{
+				x: "0",
+				y: "0",
+				duration: 0.8,
+				opacity: 1,
+				onComplete: () => {
+					elMask.value!.style.display = 'none'
+				}
+			},
+		)
 	}
 }
 
@@ -164,8 +174,8 @@ onMounted(() => {
 	position: absolute;
 	bottom: 0;
 	right: 0;
-	height: 100vh;
-	width: 100vw;
+	height: 200vh;
+	width: 200vw;
 
 	background:
 		repeating-linear-gradient(-50deg,
@@ -174,6 +184,7 @@ onMounted(() => {
 			#ffffff16 4px,
 			#ffffff16 8px,
 		);
+	clip-path: polygon(0 0, 100% 0, 0 100%);
 
 	// backdrop-filter: blur(3px);
 
