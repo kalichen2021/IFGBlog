@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { ref, onMounted } from 'vue'
 
+import FilterLib from '@/components/FilterLib.vue';
 import HeadBox from '@/components/HeadBox.vue';
 import DashBoard from '@/components/DashBoard.vue'
 import RouteArrow from '@/components/RouteArrow.vue';
@@ -135,8 +136,8 @@ onMounted(() => {
       <RouterView />
     </div>
     <DashBoard />
-
     <routeArrow />
+    <FilterLib />
   </main>
 </template>
 

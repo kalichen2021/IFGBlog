@@ -8,9 +8,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     DashBoard: typeof import('./components/DashBoard.vue')['default']
-    ElIcon: typeof import('element-plus/es')['ElIcon']
+    ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     EventItem: typeof import('./components/imgWallView/EventItem.vue')['default']
+    FilterLib: typeof import('./components/FilterLib.vue')['default']
     GameItem: typeof import('./components/publishView/GameItem.vue')['default']
     HeadBox: typeof import('./components/HeadBox.vue')['default']
     IconCommunity: typeof import('./components/icons/IconCommunity.vue')['default']
@@ -18,15 +19,9 @@ declare module 'vue' {
     IconEcosystem: typeof import('./components/icons/IconEcosystem.vue')['default']
     IconSupport: typeof import('./components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./components/icons/IconTooling.vue')['default']
-    IEpArrowDownBold: typeof import('~icons/ep/arrow-down-bold')['default']
-    IEpArrowLeftBold: typeof import('~icons/ep/arrow-left-bold')['default']
     IEpArrowRightBold: typeof import('~icons/ep/arrow-right-bold')['default']
-    IEpArrowUpBold: typeof import('~icons/ep/arrow-up-bold')['default']
     RouteArrow: typeof import('./components/RouteArrow.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-  }
-  export interface ComponentCustomProperties {
-    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

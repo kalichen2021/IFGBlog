@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
@@ -28,7 +28,7 @@
     "@iconify-json/ep": "^1.1.15",
     "@tsconfig/node20": "^20.1.4",
     "@types/jsdom": "^21.1.7",
-    "@types/node": "^20.14.5",
+    "@types/node": "^20.14.11",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vitejs/plugin-vue-jsx": "^4.0.0",
     "@vue/test-utils": "^2.4.6",

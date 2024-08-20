@@ -55,7 +55,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@comp': fileURLToPath(new URL('./src/components', import.meta.url)),
       '@view': fileURLToPath(new URL('./src/views', import.meta.url)),
-    }
+    },
   },
   css: {
     preprocessorOptions: {

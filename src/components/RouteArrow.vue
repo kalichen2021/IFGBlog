@@ -34,6 +34,7 @@ const routeLinkList = [
 	transform: translate(-50%) scale(1, 4);
 	overflow: visible;
 	transition: transform 0.25s ease-in;
+	z-index: 30;
 
 	&:hover {
 		// transform-origin: bottom;
