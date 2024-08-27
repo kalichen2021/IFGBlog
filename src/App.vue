@@ -10,10 +10,9 @@ import RouteArrow from '@/components/RouteArrow.vue';
 
 const elCvs = ref<HTMLCanvasElement>()
 
-// !!!!!?????
 const cvsInit = (elCvs: HTMLCanvasElement) => {
-  elCvs.width = window.innerWidth 
-  elCvs.height = window.innerHeight 
+  elCvs.width = window.innerWidth
+  elCvs.height = window.innerHeight
 }
 /**
  * 获得 [min,max] 范围内的随机整数
@@ -133,7 +132,17 @@ onMounted(() => {
   <main>
     <HeadBox />
     <div class="viewBox">
-      <RouterView />
+      <router-view v-slot="{ Component }">
+        <transition
+          mode="out-in" 
+          appear 
+          enter-active-class="animate__animated animate__bounce fade-enter-active"
+          leave-active-class="animate__animated animate__shakeX fade-leave-active"
+          appear-active-class="animate__animated animate__bounceInDown"
+        >
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </div>
     <DashBoard />
     <routeArrow />
@@ -160,20 +169,14 @@ main {
   width: 100%;
 
   div {
-
-    // position: absolute;
-    // top: 0;
-    // bottom: 0;
-    // right: 0;
-    // left: 0;
-    // left: calc($dashBoardWidth + $dashBoardLeft);
     width: 100%;
     height: 100%;
 
     overflow: visible;
   }
 
-  div[welcome], div[mask] {
+  div[welcome],
+  div[mask] {
     left: 0;
   }
 }
@@ -189,4 +192,19 @@ canvas {
   background-image: linear-gradient(120deg, var(--color-da2) 0%, var(--color-d) 100%);
 }
 
+.viewTransition-enter,
+.viewTransition-enter-active,
+.viewTransition-leave-active {
+  transform: translateX(-50vw);
+  opacity: 0;
+
+}
+
+.viewTransition-enter-to {
+  transform: translateX(0);
+  opacity: 1;
+
+  transition: transform 1s ease-in-out;
+
+}
 </style>

@@ -1,20 +1,28 @@
 <template>
 	<div class="gameItem">
-		<img src="@/assets/img/gameItem/2.jpg" alt="">
+		<!-- <i-ep-close id="closeBtn" @click="$emit('close')" /> -->
+		<img src="" alt="" ref="img">
 		<main class="infoBox">
-			<div game-name>{{ itemInfo.gameName }}</div>
+			<div game-name>
+				{{ itemInfo.gameName }}
+			</div>
 			<div class="tagList">
 				<span v-for="i in tagList">{{ i }}</span>
 			</div>
 			<div class="text">
 				{{ itemInfo.describtion }}
+				<div class="content" v-html="content"></div>
 			</div>
-			<!-- <div class="text describtion"></div> -->
 		</main>
 	</div>
 </template>
 
 <script setup lang="ts">
+import { onMounted, ref, type Ref } from 'vue'
+import axios from 'axios';
+import MarkdownIt from 'markdown-it';
+import { TextDoc } from '@/assets/ts/utils';
+
 
 const props = defineProps({
 	itemInfo: {
@@ -23,10 +31,69 @@ const props = defineProps({
 	}
 })
 
+const md = new MarkdownIt()
+const txt = new TextDoc()
+
 const tagList = props.itemInfo.tag
+const img = ref<HTMLImageElement>()
+const contentUrl = {
+	text: `${import.meta.env.BASE_URL}/source/publishItem/text/`,
+	markdown: `${import.meta.env.BASE_URL}/source/publishItem/markdown/`
+}
+const content = ref('')
+
+
+// 设置图片地址
+const getImgUrl = (url: string) => {
+	const gameSourcePath = `${import.meta.env.BASE_URL}/source/publishItem/`
+	return gameSourcePath.concat('img/', url)
+}
+
+const getContentSource = async () => {
+	const itemContent = props.itemInfo.content
+	let htmlText = ""
+	let res
+	switch (itemContent.type) {
+		case 'text':
+			res = await axios.get(contentUrl.text.concat(itemContent.main))
+			htmlText = txt.render(res.data)
+			break
+		case 'markdown':
+			res = await axios.get(contentUrl.markdown.concat(itemContent.main))
+			htmlText = md.render(res.data)
+			break
+		default:
+			console.log('error')
+			break
+	}
+	return htmlText
+}
+
+
+onMounted(() => {
+	img.value?.focus()
+
+	if (img.value) {
+		img.value.src = getImgUrl(props.itemInfo.img)
+	}
+
+	getContentSource()
+		.then(htmlText => {
+			content.value = htmlText
+		})
+})
 </script>
 
 <style lang="scss" scoped>
+@mixin gradientBorder {
+	border: 1px solid transparent;
+	background-clip: padding-box, border-box;
+	background-origin: padding-box, border-box;
+	background-image:
+		linear-gradient(to right, var(--color-ca2), var(--color-ca2)),
+		linear-gradient(90deg, var(--color-ba2), var(--color-d));
+}
+
 .gameItem {
 	--border-radius: 10px;
 	display: flex;
@@ -37,13 +104,7 @@ const tagList = props.itemInfo.tag
 	padding-bottom: 0.4rem;
 	background-color: var(--color-da1);
 
-	border: 1px solid transparent;
-	background-clip: padding-box, border-box;
-	background-origin: padding-box, border-box;
-	background-image:
-		linear-gradient(to right, var(--color-ca2), var(--color-ca2)),
-		linear-gradient(90deg, var(--color-ba2), var(--color-d));
-
+	@include gradientBorder;
 	box-shadow: var(--color-aa2) 0px 10px 30px 0px;
 
 	border-radius: var(--border-radius);
@@ -152,9 +213,9 @@ const tagList = props.itemInfo.tag
 }
 
 .detailBox {
-	position: fixed;
-	top: 5vh;
-	width: 80vw;
+	position: absolute;
+	top: 1.5vh;
+	width: 85vw;
 	height: 90vh;
 	z-index: 5;
 
@@ -163,6 +224,8 @@ const tagList = props.itemInfo.tag
 	overflow: visible;
 	align-items: center;
 	justify-content: center;
+
+	font-size: var(--font-size-medium);
 
 	img {
 		height: 80%;

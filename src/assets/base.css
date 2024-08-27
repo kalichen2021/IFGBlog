@@ -70,6 +70,10 @@
 
   --color-font: rgba(181, 225, 255, 1);
   --color-font-minor1: rgba(181, 225, 255, 0.7);
+
+  --font-size-small: 1rem;
+  --font-size-medium: 1.2rem;
+  --font-size-large: 1.4rem;
 }
 
 *,

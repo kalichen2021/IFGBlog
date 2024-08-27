@@ -10,26 +10,31 @@
 <script setup lang="ts">
 import { ref, onMounted, type Ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import axios from 'axios'
 
 import { gsap } from 'gsap';
 import { Flip } from 'gsap/Flip';
 import GameItem from '@/components/publishView/GameItem.vue';
-import publishViewData from '@/source/publishItem/main.json'
+import publishViewDataUrl from '/source/publishItem/main.json?url'
 
-import { smoothTransition, getRowAndColumn } from '@/assets/js/main';
+import { smoothTransition, getRowAndColumn } from '@/assets/ts/main';
+import { getData } from '@/assets/ts/utils';
 import _ from 'lodash';
 
-
-
-const gameList = publishViewData.itemList
 
 const hasNotAni = ref<Boolean>(true)
 const elPublishMain = ref<HTMLElement>()
 const elAni = ref<HTMLElement>()
 const elMask = ref<HTMLElement>()
 const logRowAndColumn = ref<Object>({ rowCount: 0, columnCount: 0 })
+const gameList = ref<[]>([])
 
 gsap.registerPlugin(Flip)
+
+const fetchGameData = async () => {
+	const gameData = await getData<'itemList'>(publishViewDataUrl)
+	gameList.value = gameData.itemList
+}
 
 const elMaskOp = {
 	show: () => {
@@ -92,6 +97,8 @@ class elGridResize {
 
 onMounted(() => {
 	elPublishMain?.value?.focus()
+
+	fetchGameData()
 	const curRouteName = useRoute().name
 
 	const elMainResize = new elGridResize()
@@ -100,28 +107,28 @@ onMounted(() => {
 	elMainResize.setLog(logRowAndColumn)
 	const resizeEvent = () => {
 		elMainResize.setLog(logRowAndColumn)
+		elMainResize.setStyle()
 
-		watch(logRowAndColumn, (newVal, oldVal) => {
-			if (!_.isEqual(newVal, oldVal)) {
-				smoothTransition(elPublishMain.value!, () => {
-					elMainResize.setStyle()
-				})
-			}
-		})
+		// watch(logRowAndColumn, (newVal, oldVal) => {
+		// 	if (!_.isEqual(newVal, oldVal)) {
+		// 		smoothTransition(elPublishMain.value!, () => {
+		// 			elMainResize.setStyle()
+		// 		})
+		// 	}
+		// })
 	}
 	window.addEventListener('resize', resizeEvent)
 	// window.removeEventListener('resize', resizeEvent)
 
 	document.onclick = (e) => {
 		const target = e.target as HTMLElement;
-		const elMask = document.getElementsByClassName('mask')[0]
 		if (target.className === "gameItem" && hasNotAni.value) {
 			console.log('clicked')
 			elAni.value = target
 
 			elMaskOp.show()
 			const state = Flip.getState(".gameItem")
-			elAni.value!.style.zIndex = '998' // 置于页面最上层
+			elAni.value!.style.zIndex = '40' // 置于页面最上层
 			elAni.value!.classList.add('detailBox')
 			Flip.from(state, {
 				duration: 0.8,
@@ -132,11 +139,11 @@ onMounted(() => {
 
 			elMaskOp.hide()
 			// 保证 detailBox 置于页面最上层， 直至动画结束
-			elAni.value!.style.zIndex = '998'
+			elAni.value!.style.zIndex = '40'
 			const state = Flip.getState(".gameItem", { props: 'zIndex' })
 			elAni.value!.classList.remove('detailBox')
 			Flip.from(state, {
-				duration: 0.8,
+				duration: 0.5,
 				ease: "sine.in",
 				onComplete: () => {
 					elAni.value!.removeAttribute('style')
@@ -186,7 +193,7 @@ onMounted(() => {
 		);
 	clip-path: polygon(0 0, 100% 0, 0 100%);
 
-	// backdrop-filter: blur(3px);
+	backdrop-filter: blur(3px);
 
 	z-index: 4;
 	animation: all 0.5s ease-in-out;

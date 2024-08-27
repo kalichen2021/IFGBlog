@@ -3,8 +3,10 @@ import WelcomeView from '@/views/WelcomeView.vue'
 import PublishView from '@/views/PublishView.vue'
 import ImgWallView from '@/views/ImgWallView.vue'
 
+// 解决vue-router@4.x版本路由跳转后页面不刷新的问题
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+  // ...(typeof import.meta.env.BASE_URL === 'string' ? { base: import.meta.env.BASE_URL } : {}),
   routes: [
     {
       path: '/',
@@ -30,6 +32,6 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     }
   ]
-})
+} as any)
 
 export default router

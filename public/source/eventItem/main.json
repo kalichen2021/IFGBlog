@@ -1,11 +1,11 @@
 {
-	"eventList":[
+	"itemList":[
 		{
 		  "title": "Event Item 1",
 			"date":"2024-8-1",
 		  "description": "This is the first event item",
 		  "img": "1.jpg",
-			"eventList":[
+			"itemList":[
 				{
 					"title": "Event Item 1.1",
 					"description": "This is the first event item 1.1",
@@ -17,8 +17,8 @@
 			"title": "Event Item 1",
 			"date":"2024-8-5",
 			"description": "This is the first event item",
-			"img": "1.jpg",
-			"eventList": [
+			"img": "2.jpg",
+			"itemList": [
 				{
 					"title": "Event Item 1.1",
 					"description": "This is the first event item 1.1",
@@ -30,8 +30,8 @@
 			"title": "Event Item 1",
 			"date":"2024-9-1",
 			"description": "This is the first event item",
-			"img": "1.jpg",
-			"eventList": [
+			"img": "4.jpg",
+			"itemList": [
 				{
 					"title": "Event Item 1.1",
 					"description": "This is the first event item 1.1",
@@ -44,7 +44,7 @@
 			"date":"2024-9-3",
 			"description": "This is the first event item",
 			"img": "1.jpg",
-			"eventList": [
+			"itemList": [
 				{
 					"title": "Event Item 1.1",
 					"description": "This is the first event item 1.1",
@@ -57,7 +57,7 @@
 			"date":"2024-9-6",
 			"description": "This is the first event item",
 			"img": "1.jpg",
-			"eventList": [
+			"itemList": [
 				{
 					"title": "Event Item 1.1",
 					"description": "This is the first event item 1.1",
@@ -69,8 +69,8 @@
 			"title": "Event Item 1",
 			"date":"2024-9-9",
 			"description": "This is the first event item",
-			"img": "1.jpg",
-			"eventList": [
+			"img": "9875.jpg",
+			"itemList": [
 				{
 					"title": "Event Item 1.1",
 					"description": "This is the first event item 1.1",
@@ -78,5 +78,8 @@
 				}
 			]
 		}
-	]
+	],
+	"defaultSetting": {
+	  "itemType": ""
+	}
 }

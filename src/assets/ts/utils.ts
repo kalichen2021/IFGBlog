@@ -1,3 +1,7 @@
+import axios from 'axios'
+
+
+
 export function delay(duration = 1000) {
 	const start = Date.now();
 	while (Date.now() - start < duration) { }
@@ -15,8 +19,8 @@ export function debounce<T extends unknown>
 	return function (...args: any[]) {
 		clearTimeout(timerId!)
 		timerId = setTimeout(() => {
-			fn.apply(this,args)
-		}, delay) 
+			fn.apply(this, args)
+		}, delay)
 	} as (this: T, ...args: any[]) => void;
 }
 
@@ -27,4 +31,19 @@ export function setCssVal(el: HTMLElement, valName: string, val?: any) {
 
 	return window.getComputedStyle(el)
 		.getPropertyValue(valName)
+}
+
+export async function getData<T extends string>
+	(url: string):
+	Promise<{ [Key in T]: any } & Record<any, any>> {
+	const res = await axios.get(url) as any
+	return res.data
+}
+
+export class TextDoc {
+	constructor() { }
+	render(data: string) {
+		return data.replace(/(\r\n|\n|\r)/gm, '<br>')
+		// return data.replace('\n', '<br>')
+	}
 }

@@ -1,11 +1,13 @@
 import './assets/main.css'
 import 'element-plus/theme-chalk/dark/css-vars.css' // dark theme
+import 'animate.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+
 
 const app = createApp(App)
 

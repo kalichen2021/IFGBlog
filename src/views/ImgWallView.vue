@@ -5,7 +5,7 @@
 		</span>
 		<main class="eventList">
 			<line ref="elLine"></line>
-			<div v-for="(item, index) in eventList" class="item">
+			<div v-for="(item, index) in eventList" class="wrap">
 				<enent-item :eventData="item" :selectDate="selectDate" :index="index % 2"></enent-item>
 			</div>
 		</main>
@@ -17,24 +17,31 @@ import { onMounted, ref } from 'vue'
 
 import enentItem from '@/components/imgWallView/EventItem.vue'
 
-import imgWallData from '@/source/eventItem/main.json'
+import imgWallData from '/source/eventItem/main.json?url'
+import { getData } from '@/assets/ts/utils';
 
 const elLine = ref<HTMLDivElement | null>(null)
 const lineBg = ref<string>('123')
 const selectDate = ref<Date>(new Date())
-const eventList: any[] = imgWallData.eventList
+const eventList = ref<[]>([])
 
 const colorList = ['#000000', '#ffffff', '#ff0000', '#00ff00', '#0000ff', '#ffff00', '#00ffff', '#ff00ff']
 
+const getEventData = async () => {
+	const res = await getData<'itemList'>(imgWallData)
+	eventList.value = res.itemList
+}
 
 const lineBackgroundSet = () => {
-	const colorStr = colorList.slice(0, eventList.length + 1).join(',')
+	const colorStr = colorList.slice(0, eventList.value.length + 1).join(',')
 	lineBg.value = `linear-gradient(to right, ${colorStr})`
 	elLine.value!.style.background = lineBg.value
 }
 
 onMounted(() => {
 	elLine.value?.focus()
+
+	getEventData()
 	// lineBackgroundSet()
 
 })
@@ -82,7 +89,7 @@ $eventItemOffset: 40vh;
 		padding: 0 var(--shadow-size);
 		overflow-x: auto;
 
-		.item {
+		.wrap {
 			--item-width: 220px;
 			--item-height: 35vh;
 			--gap-column: 2rem;
@@ -106,24 +113,13 @@ $eventItemOffset: 40vh;
 		}
 
 		/* up box */
-		.item:nth-child(2n+2) {
-			// margin-bottom: $eventItemOffset;
+		.wrap:nth-child(2n+2) {
 			justify-content: flex-start;
-
 		}
 
 		/* down box */
-		.item:nth-child(2n+1) {
-			// margin-top: $eventItemOffset;
+		.wrap:nth-child(2n+1) {
 			justify-content: flex-end;
-
-			.point {
-				top: calc(50% - $eventItemOffset / 2);
-			}
-
-			.text {
-				top: calc(50% - $eventItemOffset / 2 - 1.5rem);
-			}
 		}
 	}
 
