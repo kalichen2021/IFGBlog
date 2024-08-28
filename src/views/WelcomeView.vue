@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, type ImgHTMLAttributes } from 'vue';
+import { onMounted } from 'vue';
 
 const getCenterOffset = (clientX: number, clientY: number) => {
 	return {
@@ -26,10 +26,11 @@ const imgRotate = (e: MouseEvent, imgList: HTMLElement[], oTransform: string) =>
 		img.style.transform = oTransform ? `${oTransform} ${rotateStyle}` : rotateStyle
 
 		// 影子
-		// filter: drop-shadow(0 0 10px var(--color-d));
 		img.style.filter = `drop-shadow(${x * 10}px ${y * -10}px 10px var(--color-d))`;
 	}
 }
+
+
 
 onMounted(() => {
 	const imgList = Array.from(document.querySelectorAll('div[welcome] img')) as HTMLImageElement[];
@@ -40,7 +41,12 @@ onMounted(() => {
 	}
 
 	const oTransform = imgList[0].style.transform
-	document.addEventListener('mousemove', (e) => imgRotate(e, imgList, oTransform))
+	let isFirstAni = true
+	document.addEventListener('mousemove', (e) => {
+		requestAnimationFrame(() => {
+			imgRotate(e, imgList, oTransform)
+		})
+	})
 	document.addEventListener('mouseleave', (e) => imgList.forEach(img => {
 		img.style.transition = 'transform 800ms'
 		img.style.transform = oTransform

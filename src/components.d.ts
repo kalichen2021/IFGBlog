@@ -9,7 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     DashBoard: typeof import('./components/DashBoard.vue')['default']
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
-    ElIcon: typeof import('element-plus/es')['ElIcon']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     EventItem: typeof import('./components/imgWallView/EventItem.vue')['default']
     FilterLib: typeof import('./components/FilterLib.vue')['default']
@@ -21,7 +20,8 @@ declare module 'vue' {
     IconSupport: typeof import('./components/icons/IconSupport.vue')['default']
     IconTooling: typeof import('./components/icons/IconTooling.vue')['default']
     IEpArrowRightBold: typeof import('~icons/ep/arrow-right-bold')['default']
-    IEpClose: typeof import('~icons/ep/close')['default']
+    IEpMoreFilled: typeof import('~icons/ep/more-filled')['default']
+    IEpSetting: typeof import('~icons/ep/setting')['default']
     RouteArrow: typeof import('./components/RouteArrow.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

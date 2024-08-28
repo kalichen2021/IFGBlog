@@ -10,7 +10,7 @@
 				<span v-for="i in tagList">{{ i }}</span>
 			</div>
 			<div class="text">
-				{{ itemInfo.describtion }}
+				<div class="describe">{{ itemInfo.describtion }}</div>
 				<div class="content" v-html="content"></div>
 			</div>
 		</main>
