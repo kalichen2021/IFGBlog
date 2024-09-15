@@ -238,6 +238,7 @@ onMounted(() => {
 		display: flex;
 		flex-flow: column wrap;
 		height: 100%;
+		margin-right: 50px;
 
 		div[game-name] {
 			height: auto;
@@ -251,6 +252,14 @@ onMounted(() => {
 			text-indent: 1em; // 缩进
 			color: var(--color-font-minor1);
 			font-weight: 200;
+
+			width: 100%;
+
+			.content{
+				width: 100%;
+				height:100%;
+				overflow: auto;
+			}
 		}
 	}
 

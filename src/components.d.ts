@@ -9,6 +9,9 @@ declare module 'vue' {
   export interface GlobalComponents {
     DashBoard: typeof import('./components/DashBoard.vue')['default']
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
+    ElDropdown: typeof import('element-plus/es')['ElDropdown']
+    ElDropdownItem: typeof import('element-plus/es')['ElDropdownItem']
+    ElDropdownMenu: typeof import('element-plus/es')['ElDropdownMenu']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     EventItem: typeof import('./components/imgWallView/EventItem.vue')['default']
     FilterLib: typeof import('./components/FilterLib.vue')['default']
