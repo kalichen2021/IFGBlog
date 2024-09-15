@@ -21,7 +21,6 @@ declare module 'vue' {
     IconTooling: typeof import('./components/icons/IconTooling.vue')['default']
     IEpArrowRightBold: typeof import('~icons/ep/arrow-right-bold')['default']
     IEpMoreFilled: typeof import('~icons/ep/more-filled')['default']
-    IEpSetting: typeof import('~icons/ep/setting')['default']
     RouteArrow: typeof import('./components/RouteArrow.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
