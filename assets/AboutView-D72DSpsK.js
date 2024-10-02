@@ -1,1 +1,0 @@
-import{_ as a,o as s,c as n,a as o}from"./index-CaRjBEC2.js";const t={},e={class:"about"},r=[o("h1",null,"This is an about page",-1)];const i=a(t,[["render",function(a,o){return s(),n("div",e,r)}]]);export{i as default};
