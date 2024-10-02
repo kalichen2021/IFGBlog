@@ -36,7 +36,7 @@ onMounted(() => {
 	const imgList = Array.from(document.querySelectorAll('div[welcome] img')) as HTMLImageElement[];
 	for (let i = 0; i < 5; i++) {
 		const img = imgList[i]
-		img.src = `${import.meta.env.BASE_URL}/source/welcomeView/logoLayers/${i + 1}.png`
+		img.src = `./source/welcomeView/logoLayers/${i + 1}.png`
 		img.alt = `layer${i + 1}`
 	}
 

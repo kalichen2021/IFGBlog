@@ -6,6 +6,7 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import Inspect from 'vite-plugin-inspect'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -24,6 +25,12 @@ export default defineConfig({
     vue(),
     vueJsx(),
     vueDevTools(),
+    // 打包分析
+    visualizer({
+      open: true,
+      filename: 'visualizer.html' //分析图生成的文件名
+    }),
+
     AutoImport({
       resolvers: [
         ElementPlusResolver(),
@@ -65,4 +72,16 @@ export default defineConfig({
       }
     }
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor'
+          }
+        }
+      }
+    }
+  }
+  
 })
