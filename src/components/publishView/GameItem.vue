@@ -118,7 +118,7 @@ onMounted(() => {
 
 		.infoBox>.text {
 			white-space: wrap;
-			text-indent: 1em; // 缩进
+			// text-indent: 1em; // 缩进
 			color: var(--color-font-minor1);
 			font-weight: 200;
 		}
@@ -212,6 +212,7 @@ onMounted(() => {
 	}
 }
 
+// 展开情况
 .detailBox {
 	position: absolute;
 	top: 1.5vh;
@@ -227,6 +228,12 @@ onMounted(() => {
 
 	font-size: var(--font-size-medium);
 
+	&:hover {
+		.infoBox>.text {
+			text-indent: none;
+		}
+	}
+
 	img {
 		height: 80%;
 		width: min(20%, 200px);
@@ -238,7 +245,9 @@ onMounted(() => {
 		display: flex;
 		flex-flow: column wrap;
 		height: 100%;
-		margin-right: 50px;
+
+		margin-left: 20px;
+		padding: 0 0;
 
 		div[game-name] {
 			height: auto;
@@ -246,21 +255,24 @@ onMounted(() => {
 		}
 
 		.text {
-			margin: 1.5rem 1rem;
+			margin: 1.5rem 0rem;
 			flex: 1;
 			white-space: wrap;
-			text-indent: 1em; // 缩进
+			// text-indent: 1em; // 缩进
 			color: var(--color-font-minor1);
 			font-weight: 200;
 
 			width: 100%;
 
-			.content{
+			background: none;
+
+			.content {
 				width: 100%;
-				height:100%;
+				height: 100%;
 				overflow: auto;
 			}
 		}
+
 	}
 
 	&:hover img {

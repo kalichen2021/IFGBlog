@@ -2,7 +2,6 @@
 	<div welcome>
 		<main>
 			<img><img><img><img><img>
-
 		</main>
 	</div>
 </template>
@@ -26,7 +25,7 @@ const imgRotate = (e: MouseEvent, imgList: HTMLElement[], oTransform: string) =>
 		img.style.transform = oTransform ? `${oTransform} ${rotateStyle}` : rotateStyle
 
 		// 影子
-		img.style.filter = `drop-shadow(${x * 10}px ${y * -10}px 10px var(--color-d))`;
+		img.style.filter = `drop-shadow(${x * -10}px ${y * -10}px 10px var(--color-d))`;
 	}
 }
 
@@ -97,11 +96,13 @@ div {
 			// background-color: aliceblue;
 
 			filter: drop-shadow(0 0 10px var(--color-d));
+			transition: all 0.1s;
 		}
 
 		$offsetZ: 20px;
 		$rotateY: 0deg;
 
+		// 景深设置
 		@for $i from 1 through 5 {
 			img:nth-child(#{$i}) {
 				$step: $i * 1;

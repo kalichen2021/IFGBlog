@@ -4,28 +4,29 @@
 			<img src="@/assets/logo.svg" alt="IFGLogo">
 		</span>
 		<div class="routes">
-			<span v-for="item in i18nForHeadBox[langOps]" :key="item">
-				{{ item }}
+			<span v-for="item in HeadBoxWidgets" :key="item">
+				<RouterLink :to="'/' + item" class="span-routes">{{ HeadBoxI18nTexts[item][curLangOps] }}</RouterLink>
+
 			</span>
 		</div>
 		&nbsp;&nbsp;|&nbsp;&nbsp;
 		<div class="other">
 
 			<span i18n>
-				<el-dropdown placement="bottom" @command="switchLang" >
+				<el-dropdown placement="bottom" @command="switchLang">
 					<!-- Dropdown -->
 					<!-- icon of lang switch -->
-					<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" width="24" height="24"
-						viewBox="0 0 24 24">
+					<svg xmlns="http://www.w3.org/2000/svg" focusable="false" width="24" height="24" viewBox="0 0 24 24">
 						<path d="M0 0h24v24H0z" fill="none"></path>
 						<path
 							d=" M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z ">
 						</path>
 					</svg>
+					<!--下拉菜单目录-->
 					<template #dropdown>
 						<el-dropdown-menu>
-							<el-dropdown-item v-for="(value, key) in i18nForHeadBox" :command="key">
-								{{ key }}
+							<el-dropdown-item v-for="(value, key) in LangOps" :command="value">
+								{{ value }}
 							</el-dropdown-item>
 						</el-dropdown-menu>
 					</template>
@@ -43,18 +44,22 @@
 <script lang="ts" setup>
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
-import { type Ti18nForHeadBox } from '@/assets/ts/typeLib';
+import { RouterLink } from 'vue-router';
+import { widgets, i18n, type TypeI18nTexts, type TypeI18nOps } from '@/settings';
 
-const i18nPath = `${import.meta.env.BASE_URL}/source/i18n.json`
 
-const i18nForHeadBox = ref<Ti18nForHeadBox>({
-	"zh_CN": null
-})
-const langOps = ref<string>("zh_CN")
+
+const HeadBoxWidgets = widgets.comp.headbox.routes
+const HeadBoxI18nTexts: TypeI18nTexts = i18n.comp.headbox.routes
+const LangOps = i18n.lang
+
+
+const curLangOps = ref<TypeI18nOps>("zh_CN")
+
 
 // DropDown Command
-const switchLang = (command: string) => {
-	langOps.value = command
+const switchLang = (command: TypeI18nOps) => {
+	curLangOps.value = command
 	let msg
 	switch (command) {
 		case "zh_CN": msg = "已切换为中文"; break;
@@ -67,10 +72,16 @@ const switchLang = (command: string) => {
 	})
 }
 
-axios.get(i18nPath)
-	.then((res) => {
-		i18nForHeadBox.value = res.data.HeadBox
-	})
+
+
+// // 动态获得headbox上下文
+// axios.get(settings)
+// 	.then((res) => {
+// 		console.log(res.data)
+// 		HeadBoxWidgets.value = res.data.widgets.comp.headbox.routes
+// 		HeadBoxI18nTexts.value = res.data.i18n.comp.headbox.routes
+// 		LangOps.value = res.data.i18n.lang
+// 	})
 
 
 onMounted(() => {
@@ -127,12 +138,15 @@ header {
 			@include flexCC;
 			margin: 0 10px;
 
-			font-size: var(--font-size-medium);
-			font-weight: 500;
-			color: var(--color-font);
 			fill: var(--color-font);
 
 			cursor: pointer;
+		}
+
+		.span-routes {
+			font-size: var(--font-size-medium);
+			font-weight: 500;
+			color: var(--color-font);
 		}
 
 		span:hover {
@@ -150,8 +164,8 @@ header {
 			transform: scale(1, 0.7) rotateZ(180deg);
 		}
 
-		span[i18n]{
-			.el-tooltip__trigger:hover{
+		span[i18n] {
+			.el-tooltip__trigger:hover {
 				background-color: var(--color-aa1);
 			}
 		}

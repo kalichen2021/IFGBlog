@@ -133,13 +133,9 @@ onMounted(() => {
     <HeadBox />
     <div class="viewBox">
       <router-view v-slot="{ Component }">
-        <transition
-          mode="out-in" 
-          appear 
-          enter-active-class="animate__animated animate__bounce fade-enter-active"
-          leave-active-class="animate__animated animate__shakeX fade-leave-active"
-          appear-active-class="animate__animated animate__bounceInDown"
-        >
+        <transition enter-active-class="animate__animated animate__slideInLeft fade-enter-active"
+          leave-active-class="animate__animated animate__slideOutRight fade-leave-active"
+          appear-active-class="animate__animated animate__fadeIn fade-enter-active" mode="out-in" name="viewTransition"ppear>
           <component :is="Component" />
         </transition>
       </router-view>
